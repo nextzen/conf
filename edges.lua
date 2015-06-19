@@ -454,11 +454,13 @@ function filter_tags_generic(kv)
 
   elseif oneway_norm == nil or oneway_norm == "false" then
     kv["auto_backward"] = kv["auto_forward"]
-    if kv["bike_backward"] == "false" then
+    if (kv["bike_backward"] == "false" and kv["oneway:bicycle"] ~= "-1" and 
+       (kv["oneway:bicycle"] == nil or oneway[kv["oneway:bicycle"]] == false)) then
       kv["bike_backward"] = kv["bike_forward"]
     end
 
-    if kv["bus_backward"] == "false" then
+    if (kv["bus_backward"] == "false" and kv["oneway:bus"] ~= "-1" and 
+       (kv["oneway:bus"] == nil or oneway[kv["oneway:bus"]] == false)) then
       kv["bus_backward"] = kv["bus_forward"]
     end
   end
@@ -491,13 +493,13 @@ function filter_tags_generic(kv)
     kv["bike_backward"] = forwards
   end
 
-  if oneway_bike == "-1" then
+  if kv["oneway:bicycle"] == "-1" then
     local forwards = kv["bike_forward"]
     kv["bike_forward"] = kv["bike_backward"]
     kv["bike_backward"] = forwards
   end
 
-  if oneway_bus == "-1" then
+  if kv["oneway:bus"] == "-1" then
     local forwards = kv["bus_forward"]
     kv["bus_forward"] = kv["bus_backward"]
     kv["bus_backward"] = forwards
