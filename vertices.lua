@@ -113,6 +113,11 @@ toll = {
 function nodes_proc (kv, nokeys)
   --normalize a few tags that we care about
   local access = access[kv["access"]] or "true"
+
+  if kv["impassable"] == "yes" then
+     access = "false"
+  end  
+
   local foot = foot[kv["foot"]] or 0
   local bike = bicycle[kv["bicycle"]] or 0
   local auto = motor_vehicle[kv["motorcar"]]

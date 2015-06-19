@@ -13,6 +13,15 @@
    },
    "tags": [
       {
+         "key": "impassable",
+         "value": "yes",
+         "object_types": [
+            "node",
+            "way"
+         ],
+         "description": "This is used by HOT.  Turns off access unless bus, motorcar, motor_vehicle, foot, etc. is set."
+      },    
+      {
          "key": "highway",
          "value": "motorway",
          "object_types": [

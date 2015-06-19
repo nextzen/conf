@@ -348,7 +348,7 @@ function filter_tags_generic(kv)
       kv[k] = v
     end
 
-    if access == "false" then
+    if kv["impassable"] == "yes" or access == "false" then
       kv["auto_forward"] = "false"
       kv["bus_forward"] = "false"
       kv["pedestrian"] = "false"
@@ -375,7 +375,7 @@ function filter_tags_generic(kv)
     --if its a ferry and these tags dont show up we want to set them to true 
     local default_val = tostring(ferry)
 
-    if access == "false" then
+    if kv["impassable"] == "yes" or access == "false" then
       kv["auto_forward"] = "false"
       kv["bus_forward"] = "false"
       kv["pedestrian"] = "false"
