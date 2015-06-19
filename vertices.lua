@@ -1,54 +1,91 @@
 access = {
-["no"] = "false",
-["official"] = "false",
-["private"] = "false",
-["destination"] = "false",
 ["yes"] = "true",
+["private"] = "true",
+["no"] = "false",
 ["permissive"] = "true",
 ["agricultural"] = "false",
-["customers"] = "true"
+["use_sidepath"] = "true",
+["delivery"] = "true",
+["designated"] = "true",
+["dismount"] = "true",
+["discouraged"] = "false",
+["forestry"] = "false",
+["destination"] = "true",
+["customers"] = "true",
+["official"] = "false",
+["public"] = "true",
+["restricted"] = "false",
+["allowed"] = "true"
 }
 
 motor_vehicle = {
-["no"] = 0,
 ["yes"] = 1,
+["private"] = 1,
+["no"] = 0,
+["permissive"] = 1,
 ["agricultural"] = 0,
-["destination"] = 0,
-["private"] = 0,
-["forestry"] = 0,
+["delivery"] = 1,
 ["designated"] = 1,
-["permissive"] = 1
+["discouraged"] = 0,
+["forestry"] = 0,
+["destination"] = 1,
+["customers"] = 1,
+["official"] = 0,
+["public"] = 1,
+["restricted"] = 0,
+["allowed"] = 1
 }
 
 bicycle = {
 ["yes"] = 4,
 ["designated"] = 4,
-["dismount"] = 4,
+["use_sidepath"] = 4,
 ["no"] = 0,
+["permissive"] = 4,
+["destination"] = 4,
+["dismount"] = 4,
 ["lane"] = 4,
 ["track"] = 4,
 ["shared"] = 4,
 ["shared_lane"] = 4,
 ["sidepath"] = 4,
 ["share_busway"] = 4,
-["none"] = 0
+["none"] = 0,
+["allowed"] = 4,
+["private"] = 4
 }
 
 foot = {
-["no"] = 0,
 ["yes"] = 2,
-["designated"] = 2,
+["private"] = 2,
+["no"] = 0,
 ["permissive"] = 2,
-["crossing"] = 2
+["agricultural"] = 0,
+["use_sidepath"] = 2,
+["delivery"] = 2,
+["designated"] = 2,
+["discouraged"] = 0,
+["forestry"] = 0,
+["destination"] = 2,
+["customers"] = 2,
+["official"] = 0,
+["public"] = 2,
+["restricted"] = 0,
+["crossing"] = 2,
+["sidewalk"] = 2,
+["allowed"] = 2,
+["passable"] = 2,
+["footway"] = 2
 }
 
 bus = {
 ["no"] = 0,
 ["yes"] = 64,
 ["designated"] = 64,
+["urban"] = 64,
 ["permissive"] = 64,
 ["restricted"] = 64,
-["destination"] = 0,
+["destination"] = 64,
 ["delivery"] = 0
 }
 
@@ -56,6 +93,8 @@ psv = {
 ["bus"] = 64,
 ["no"] = 0,
 ["yes"] = 64,
+["designated"] = 64,
+["permissive"] = 64,
 ["1"] = 64,
 ["2"] = 64
 }
