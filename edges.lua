@@ -121,14 +121,23 @@ default_speed = {
 }
 
 access = {
-["no"] = "false",
-["official"] = "false",
-["private"] = "false",
-["destination"] = "false",
 ["yes"] = "true",
+["private"] = "true",
+["no"] = "false",
 ["permissive"] = "true",
 ["agricultural"] = "false",
-["customers"] = "true"
+["use_sidepath"] = "true",
+["delivery"] = "true",
+["designated"] = "true",
+["dismount"] = "true",
+["discouraged"] = "false",
+["forestry"] = "false",
+["destination"] = "true",
+["customers"] = "true",
+["official"] = "false",
+["public"] = "true",
+["restricted"] = "false",
+["allowed"] = "true"
 }
 
 private = {
@@ -137,7 +146,8 @@ private = {
 
 no_thru_traffic = {
 ["destination"] = "true",
-["customers"] = "true"
+["customers"] = "true",
+["delivery"] = "true"
 }
 
 use = {
@@ -149,31 +159,54 @@ use = {
 }
 
 motor_vehicle = {
-["no"] = "false",
 ["yes"] = "true",
+["private"] = "true",
+["no"] = "false",
+["permissive"] = "true",
 ["agricultural"] = "false",
-["destination"] = "false",
-["private"] = "false",
-["forestry"] = "false",
+["delivery"] = "true",
 ["designated"] = "true",
-["permissive"] = "true"
+["discouraged"] = "false",
+["forestry"] = "false",
+["destination"] = "true",
+["customers"] = "true",
+["official"] = "false",
+["public"] = "true",
+["restricted"] = "false",
+["allowed"] = "true"
 }
 
 foot = {
-["no"] = "false",
 ["yes"] = "true",
-["designated"] = "true",
+["private"] = "true",
+["no"] = "false",
 ["permissive"] = "true",
-["crossing"] = "true"
+["agricultural"] = "false",
+["use_sidepath"] = "true",
+["delivery"] = "true",
+["designated"] = "true",
+["discouraged"] = "false",
+["forestry"] = "false",
+["destination"] = "true",
+["customers"] = "true",
+["official"] = "false",
+["public"] = "true",
+["restricted"] = "false",
+["crossing"] = "true",
+["sidewalk"] = "true",
+["allowed"] = "true",
+["passable"] = "true",
+["footway"] = "true"
 }
 
 bus = {
 ["no"] = "false",
 ["yes"] = "true",
 ["designated"] = "true",
+["urban"] = "true",
 ["permissive"] = "true",
 ["restricted"] = "true",
-["destination"] = "false",
+["destination"] = "true",
 ["delivery"] = "false"
 }
 
@@ -181,6 +214,8 @@ psv = {
 ["bus"] = "true",
 ["no"] = "false",
 ["yes"] = "true",
+["designated"] = "true",
+["permissive"] = "true",
 ["1"] = "true",
 ["2"] = "true"
 }
@@ -188,15 +223,20 @@ psv = {
 bicycle = {
 ["yes"] = "true",
 ["designated"] = "true",
-["dismount"] = "true",
+["use_sidepath"] = "true",
 ["no"] = "false",
+["permissive"] = "true",
+["destination"] = "true",
+["dismount"] = "true",
 ["lane"] = "true",
 ["track"] = "true",
 ["shared"] = "true",
 ["shared_lane"] = "true",
 ["sidepath"] = "true",
 ["share_busway"] = "true",
-["none"] = "false"
+["none"] = "false",
+["allowed"] = "true",
+["private"] = "true"
 }
 
 bike_reverse = {
@@ -308,7 +348,7 @@ function filter_tags_generic(kv)
       kv[k] = v
     end
 
-    if access == "false" then
+    if kv["impassable"] == "yes" or access == "false" then
       kv["auto_forward"] = "false"
       kv["bus_forward"] = "false"
       kv["pedestrian"] = "false"
@@ -335,7 +375,7 @@ function filter_tags_generic(kv)
     --if its a ferry and these tags dont show up we want to set them to true 
     local default_val = tostring(ferry)
 
-    if access == "false" then
+    if kv["impassable"] == "yes" or access == "false" then
       kv["auto_forward"] = "false"
       kv["bus_forward"] = "false"
       kv["pedestrian"] = "false"
@@ -414,11 +454,13 @@ function filter_tags_generic(kv)
 
   elseif oneway_norm == nil or oneway_norm == "false" then
     kv["auto_backward"] = kv["auto_forward"]
-    if kv["bike_backward"] == "false" then
+    if (kv["bike_backward"] == "false" and kv["oneway:bicycle"] ~= "-1" and 
+       (kv["oneway:bicycle"] == nil or oneway[kv["oneway:bicycle"]] == false)) then
       kv["bike_backward"] = kv["bike_forward"]
     end
 
-    if kv["bus_backward"] == "false" then
+    if (kv["bus_backward"] == "false" and kv["oneway:bus"] ~= "-1" and 
+       (kv["oneway:bus"] == nil or oneway[kv["oneway:bus"]] == false)) then
       kv["bus_backward"] = kv["bus_forward"]
     end
   end
@@ -449,6 +491,18 @@ function filter_tags_generic(kv)
     forwards = kv["bike_forward"]
     kv["bike_forward"] = kv["bike_backward"]
     kv["bike_backward"] = forwards
+  end
+
+  if kv["oneway:bicycle"] == "-1" then
+    local forwards = kv["bike_forward"]
+    kv["bike_forward"] = kv["bike_backward"]
+    kv["bike_backward"] = forwards
+  end
+
+  if kv["oneway:bus"] == "-1" then
+    local forwards = kv["bus_forward"]
+    kv["bus_forward"] = kv["bus_backward"]
+    kv["bus_backward"] = forwards
   end
 
   -- bus only logic
