@@ -1,0 +1,16 @@
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
+
+dependencies:
+  override:
+    - apt-get install jq
+
+test:
+  override:
+    - jq '.' valhalla.json
+
+general:
+  artifacts:
+    - valhalla.json
