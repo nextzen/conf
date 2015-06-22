@@ -5,11 +5,10 @@ checkout:
 
 dependencies:
   override:
-    - sudo apt-get install jq
 
 test:
   override:
-    - jq '.' valhalla.json 2>/dev/null
+    - python -c "import json; json.load(open('valhalla.json'))"
 
 general:
   artifacts:
