@@ -9,8 +9,8 @@ dependencies:
 
 test:
   override:
-    - set -e
     - jq '.' valhalla.json
+    - ls this_is_not_a_file
 
 general:
   artifacts:
