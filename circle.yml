@@ -5,7 +5,7 @@ checkout:
 
 dependencies:
   override:
-    - apt-get install jq
+    - sudo apt-get install jq
 
 test:
   override:
