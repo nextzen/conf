@@ -31,6 +31,10 @@
       "admin_dir": "/data/valhalla",
       "db_name": "admin.sqlite"
     },
+    "statistics": {
+      "statistics_dir": "/data/valhalla",
+      "db_name": "statistics.sqlite"
+    },
     "transit": {
       "transit_dir": "/data/valhalla",
       "db_name": "transit.sqlite"
