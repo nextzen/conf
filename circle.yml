@@ -1,0 +1,15 @@
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
+
+dependencies:
+  override:
+
+test:
+  override:
+    - python -c "import json; json.load(open('valhalla.json'))"
+
+general:
+  artifacts:
+    - valhalla.json
