@@ -262,7 +262,7 @@
             "node",
             "way"
          ],
-         "description": "Sets access flag to false"
+         "description": "Sets access flag to true"
       },
       {
          "key": "access",
@@ -415,7 +415,7 @@
             "node",
             "way"
          ],
-         "description": "Overrides access flags for auto.  Auto Routing not allowed."
+         "description": "Overrides access flags for auto.  Auto Routing allowed."
       },
       {
          "key": "motorcar",
@@ -568,7 +568,7 @@
             "node",
             "way"
          ],
-         "description": "Overrides access flags for auto.  Auto Routing not allowed."
+         "description": "Overrides access flags for auto.  Auto Routing allowed."
       },
       {
          "key": "motor_vehicle",
@@ -1031,7 +1031,7 @@
             "node",
             "way"
          ],
-         "description": "Overrides access flags for pedestrian.  Pedestrian Routing not allowed."
+         "description": "Overrides access flags for pedestrian.  Pedestrian Routing allowed."
       },
       {
          "key": "foot",
@@ -1205,7 +1205,7 @@
          "object_types": [
             "way"
          ],
-         "description": "Overrides access flags for pedestrian.  Pedestrian Routing not allowed."
+         "description": "Overrides access flags for pedestrian.  Pedestrian Routing allowed."
       },
       {
          "key": "pedestrian",
