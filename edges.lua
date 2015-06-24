@@ -136,7 +136,7 @@ access = {
 ["customers"] = "true",
 ["official"] = "false",
 ["public"] = "true",
-["restricted"] = "false",
+["restricted"] = "true",
 ["allowed"] = "true"
 }
 
@@ -172,7 +172,7 @@ motor_vehicle = {
 ["customers"] = "true",
 ["official"] = "false",
 ["public"] = "true",
-["restricted"] = "false",
+["restricted"] = "true",
 ["allowed"] = "true"
 }
 
@@ -191,7 +191,7 @@ foot = {
 ["customers"] = "true",
 ["official"] = "false",
 ["public"] = "true",
-["restricted"] = "false",
+["restricted"] = "true",
 ["crossing"] = "true",
 ["sidewalk"] = "true",
 ["allowed"] = "true",

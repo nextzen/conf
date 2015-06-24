@@ -14,7 +14,7 @@ access = {
 ["customers"] = "true",
 ["official"] = "false",
 ["public"] = "true",
-["restricted"] = "false",
+["restricted"] = "true",
 ["allowed"] = "true"
 }
 
@@ -32,7 +32,7 @@ motor_vehicle = {
 ["customers"] = 1,
 ["official"] = 0,
 ["public"] = 1,
-["restricted"] = 0,
+["restricted"] = 1,
 ["allowed"] = 1
 }
 
@@ -70,7 +70,7 @@ foot = {
 ["customers"] = 2,
 ["official"] = 0,
 ["public"] = 2,
-["restricted"] = 0,
+["restricted"] = 2,
 ["crossing"] = 2,
 ["sidewalk"] = 2,
 ["allowed"] = 2,
@@ -161,6 +161,10 @@ function nodes_proc (kv, nokeys)
 
   if kv["barrier"] == "toll_booth" then
     kv["toll_booth"] = "true"
+  end
+
+  if kv["highway"] == "motorway_junction" then
+    kv["motorway_junction"] = "true"
   end
 
   local coins = toll[kv["payment:coins"]] or "false"
