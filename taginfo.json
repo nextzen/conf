@@ -44,6 +44,13 @@
       },
       {
          "key": "highway",
+         "value": "traffic_signals",
+         "object_types": [
+            "node"
+         ]
+      },
+      {
+         "key": "highway",
          "value": "trunk",
          "object_types": [
             "way"
