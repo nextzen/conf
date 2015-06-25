@@ -7,7 +7,7 @@
       "description": "Open Source Tile-Based Routing Applications and APIs",
       "project_url": "https://github.com/valhalla",
       "doc_url": "",
-      "icon_url": "",
+      "icon_url": "https://s3.amazonaws.com/assets-staging.mapzen.com/images/mapzen-icon/logo.png",
       "contact_name": "Valhalla",
       "contact_email": "valhalla@mapzen.com"
    },
@@ -33,6 +33,13 @@
          "value": "motorway_link",
          "object_types": [
             "way"
+         ]
+      },
+      {
+         "key": "highway",
+         "value": "motorway_junction",
+         "object_types": [
+            "node"
          ]
       },
       {
