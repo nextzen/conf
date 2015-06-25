@@ -163,10 +163,6 @@ function nodes_proc (kv, nokeys)
     kv["toll_booth"] = "true"
   end
 
-  if kv["highway"] == "motorway_junction" then
-    kv["motorway_junction"] = "true"
-  end
-
   local coins = toll[kv["payment:coins"]] or "false"
   local notes = toll[kv["payment:notes"]] or "false"
 
