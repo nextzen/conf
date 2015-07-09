@@ -53,6 +53,15 @@
       "proxy": "ipc://loki"
     }
   },
+  "skadi": {
+    "logging": {
+      "type": "std_out",
+      "color": true
+    },
+    "service": {
+      "proxy": "ipc://skadi"
+    }
+  },
   "thor": {
     "logging": {
       "type": "std_out",
