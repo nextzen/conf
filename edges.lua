@@ -109,6 +109,8 @@ dow = {
 ["sa"] = 7
 }
 
+--the default speed for tracks is lowered after 
+--the call to default_speed
 default_speed = {
 [0] = 105,
 [1] = 90,
@@ -553,6 +555,11 @@ function filter_tags_generic(kv)
 
   kv["default_speed"] = default_speed[kv["road_class"]]
 
+  --lower the default speed for tracks.
+  if kv["highway"] == "track" then
+     kv["default_speed"] = math.floor(tonumber(kv["default_speed"]) * 0.5)
+  end
+
   local use = use[kv["service"]]
 
   if kv["highway"] == "steps" then
@@ -720,9 +727,28 @@ function rels_proc (kv, nokeys)
          return 1, kv
        end
        return 0, kv
+     elseif kv["route"] == "bicycle" or kv["route"] == "mtb" then
+       
+       local bike_mask = 0
+
+       if kv["network"] == "mtb" or kv["route"] == "mtb" then
+         bike_mask = 8
+       end
+
+       if kv["network"] == "ncn" then
+         bike_mask = bit32.bor(bike_mask, 1)
+       elseif kv["network"] == "rcn" then
+         bike_mask = bit32.bor(bike_mask, 2)
+       elseif kv["network"] == "lcn" then
+         bike_mask = bit32.bor(bike_mask, 4)
+       end
+
+       kv["bike_network_mask"] = bike_mask
+       
+       return 0, kv
   --has a restiction but type is not restriction...ignore
      elseif restrict ~= nil then
-       return 1, kv
+       return 1, kv    
      else
        kv["day_on"] = nil
        kv["day_off"] = nil
