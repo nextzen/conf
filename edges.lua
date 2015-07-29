@@ -555,8 +555,8 @@ function filter_tags_generic(kv)
 
   kv["default_speed"] = default_speed[kv["road_class"]]
 
-  --lower the default speed for tracks.
-  if kv["highway"] == "track" then
+  --lower the default speed for tracks and driveways
+  if kv["highway"] == "track" or kv["service"] == "driveway" then
      kv["default_speed"] = math.floor(tonumber(kv["default_speed"]) * 0.5)
   end
 
