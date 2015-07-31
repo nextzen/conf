@@ -332,13 +332,16 @@ function normalize_speed(speed)
   local num = numeric_prefix(speed)
 
   --check if the rest of the string ends in "mph" convert to kph
-  if num and speed:sub(-3) == "mph" then
-    num = num * 1.609344
-  end
+  if num then 
+    if speed:sub(-3) == "mph" then
+      num = num * 1.609344
+    end
 
-  --if num > 150kph or num < 10kph....toss    
-  if num > 150 or num < 10 then
-    return nil
+    --if num > 150kph or num < 10kph....toss    
+    if num > 150 or num < 10 then
+      return nil
+    end
+  end
 
   return num
 end
