@@ -1,3 +1,4 @@
+this should fail
 --TODO: check if you can use lua type boolean instead of strings and pass that back to osm2pgsql
 --with the hopes that they will become strings once they get back to c++ and then just work in
 --postgres
