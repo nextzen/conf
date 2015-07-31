@@ -337,8 +337,9 @@ function normalize_speed(speed)
   end
 
   --if num > 150kph or num < 10kph....toss    
-  if num > 150 or num < 10 then
+  if num and (num > 150 or num < 10) then
     return nil
+  end
 
   return num
 end
