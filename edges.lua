@@ -336,6 +336,10 @@ function normalize_speed(speed)
     num = num * 1.609344
   end
 
+  --if num > 150kph or num < 10kph....toss    
+  if num > 150 or num < 10 then
+    return nil
+
   return num
 end
 
