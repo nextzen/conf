@@ -751,7 +751,11 @@ function rels_proc (kv, nokeys)
        end
 
        kv["bike_network_mask"] = bike_mask
-       
+
+       kv["day_on"] = nil
+       kv["day_off"] = nil
+       kv["restriction"] = nil       
+  
        return 0, kv
   --has a restiction but type is not restriction...ignore
      elseif restrict ~= nil then
