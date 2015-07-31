@@ -10,7 +10,7 @@ dependencies:
 test:
   override:
     - python -c "import json; json.load(open('valhalla.json'))"
-    - for f in *.lua; do lua $f &> /dev/null; done
+    - (rc=0; for f in *.lua; do lua $f &> /dev/null || rc=$?; done; exit $rc;)
 
 general:
   artifacts:
