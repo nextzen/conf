@@ -118,18 +118,26 @@ function nodes_proc (kv, nokeys)
      access = "false"
   end  
 
-  local foot = foot[kv["foot"]] or 0
-  local bike = bicycle[kv["bicycle"]] or 0
-  local auto = motor_vehicle[kv["motorcar"]]
-  if auto == nil then
-    auto = motor_vehicle[kv["motor_vehicle"]]
+  local foot_tag = foot[kv["foot"]] or 0
+  local bike_tag = bicycle[kv["bicycle"]] or 0
+  local auto_tag = motor_vehicle[kv["motorcar"]]
+  if auto_tag == nil then
+    auto_tag = motor_vehicle[kv["motor_vehicle"]]
   end
-  local bus = bus[kv["bus"]]
-  if bus == nil then
-    bus = psv[kv["psv"]]
+  local bus_tag = bus[kv["bus"]]
+  if bus_tag == nil then
+    bus_tag = psv[kv["psv"]]
   end
-  auto = auto or 0
-  bus = bus or 0
+  --if bus was not set and car is 
+  if bus_tag == nil and auto_tag == 1 then
+    bus_tag = 64
+  end
+  
+  local auto = auto_tag or 0
+  local bus = bus_tag or 0
+  local foot = foot_tag or 0
+  local bike = bike_tag or 0
+   
   --access was set, but foot, bus, bike, and auto tags were not.
   if access == "true" and bit32.bor(auto, bike, foot, bus) == 0 then
     bus  = 64
@@ -139,7 +147,7 @@ function nodes_proc (kv, nokeys)
   end 
 
   --check for gates and bollards
-  local gate = kv["barrier"] == "gate" or kv["barrier"] == "lift_gate"
+  local gate = kv["barrier"] == "gate" or kv["barrier"] == "lift_gate" or kv["barrier"] == "border_control"
   local bollard = false
   if gate == false then
     --if there was a bollard cars can't get through it
@@ -150,9 +158,40 @@ function nodes_proc (kv, nokeys)
       gate = true
       bollard = false
     end
+   
+    if bollard == true then
+      if bus_tag == nil then
+        bus = 0
+      end
+      if auto_tag == nil then
+        auto = 0
+      end
+    end
+  end
 
-    auto = (bollard and 0) or 1
+  --if nothing blocks access at this node assume access is allowed.
+  if gate == false and bollard == false and access == "true" then    
+    if kv["highway"] == "crossing" then   
+      bus  = 64
+      bike = 4
+      foot = 2
+      auto = 1
 
+      if bus_tag then 
+        bus = bus_tag
+      end
+  
+      if bike_tag then
+        bike = bike_tag
+      end
+ 
+      if foot_tag then
+        foot = foot_tag
+      end
+      if auto_tag then
+        auto = auto_tag
+      end
+    end
   end
 
   --store the gate and bollard info
