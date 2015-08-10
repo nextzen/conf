@@ -171,7 +171,10 @@ function nodes_proc (kv, nokeys)
 
   --if nothing blocks access at this node assume access is allowed.
   if gate == false and bollard == false and access == "true" then    
-    if kv["highway"] == "crossing" then   
+    if kv["highway"] == "crossing" or kv["railway"] == "crossing" or 
+       kv["footway"] == "crossing" or kv["cycleway"] == "crossing" or
+       kv["foot"] == "crossing" or kv["bicycle"] == "crossing" or
+       kv["pedestrian"] == "crossing" or kv["crossing"] then
       bus  = 64
       bike = 4
       foot = 2
