@@ -118,8 +118,8 @@ function nodes_proc (kv, nokeys)
      access = "false"
   end  
 
-  local foot_tag = foot[kv["foot"]] or 0
-  local bike_tag = bicycle[kv["bicycle"]] or 0
+  local foot_tag = foot[kv["foot"]] 
+  local bike_tag = bicycle[kv["bicycle"]] 
   local auto_tag = motor_vehicle[kv["motorcar"]]
   if auto_tag == nil then
     auto_tag = motor_vehicle[kv["motor_vehicle"]]
@@ -151,7 +151,7 @@ function nodes_proc (kv, nokeys)
   local bollard = false
   if gate == false then
     --if there was a bollard cars can't get through it
-    bollard = kv["barrier"] == "bollard" or kv["barrier"] == "block" or kv["bollard"] == "removable"
+    bollard = kv["barrier"] == "bollard" or kv["barrier"] == "block" or kv["bollard"] == "removable" or false
 
     --save the following as gates.
     if (bollard and (kv["bollard"] == "rising")) then
