@@ -45,7 +45,7 @@
     }
   },
   "additional_data": {
-    "elevation": "/data/valhalla/elevation/world.vrt"
+    "elevation": "/data/valhalla/elevation/"
   },
   "loki": {
     "logging": {
