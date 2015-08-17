@@ -241,6 +241,23 @@ bicycle = {
 ["private"] = "true"
 }
 
+cycleway = {
+["yes"] = "true",
+["designated"] = "true",
+["use_sidepath"] = "true",
+["permissive"] = "true",
+["destination"] = "true",
+["dismount"] = "true",
+["lane"] = "true",
+["track"] = "true",
+["shared"] = "true",
+["shared_lane"] = "true",
+["sidepath"] = "true",
+["share_busway"] = "true",
+["allowed"] = "true",
+["private"] = "true"
+}
+
 bike_reverse = {
 ["opposite"] = "true",
 ["opposite_lane"] = "true",
@@ -378,7 +395,7 @@ function filter_tags_generic(kv)
     kv["pedestrian"] = foot[kv["foot"]] or foot[kv["pedestrian"]] or kv["pedestrian"] 
 
     --check for bike_forward overrides
-    kv["bike_forward"] = bicycle[kv["bicycle"]] or bicycle[kv["cycleway"]] or kv["bike_forward"]
+    kv["bike_forward"] = bicycle[kv["bicycle"]] or cycleway[kv["cycleway"]] or kv["bike_forward"]
 
   else
     --if its a ferry and these tags dont show up we want to set them to true 
@@ -405,7 +422,7 @@ function filter_tags_generic(kv)
     kv["pedestrian"] = foot[kv["foot"]] or foot[kv["pedestrian"]] or default_val
 
     --check for bike_forward overrides
-    kv["bike_forward"] = bicycle[kv["bicycle"]] or bicycle[kv["cycleway"]] or default_val
+    kv["bike_forward"] = bicycle[kv["bicycle"]] or cycleway[kv["cycleway"]] or default_val
   end
 
   --TODO: handle Time conditional restrictions if available for HOVs with oneway = reversible
