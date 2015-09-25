@@ -15,7 +15,8 @@ access = {
 ["official"] = "false",
 ["public"] = "true",
 ["restricted"] = "true",
-["allowed"] = "true"
+["allowed"] = "true",
+["emergency"] = "false"
 }
 
 motor_vehicle = {
@@ -132,15 +133,22 @@ function nodes_proc (kv, nokeys)
   if bus_tag == nil and auto_tag == 1 then
     bus_tag = 64
   end
-  
+
+  local emergency_tag = kv["access"] == "emergency" or kv["emergency"] == "yes" or kv["service"] == "emergency_access" or nil
+  local emergency = 0
+  if emergency_tag ~= nil then
+     emergency = 16
+  end
+
   local auto = auto_tag or 0
   local bus = bus_tag or 0
   local foot = foot_tag or 0
   local bike = bike_tag or 0
    
   --access was set, but foot, bus, bike, and auto tags were not.
-  if access == "true" and bit32.bor(auto, bike, foot, bus) == 0 then
+  if access == "true" and bit32.bor(auto, emergency, bike, foot, bus) == 0 then
     bus  = 64
+    emergency = 16
     bike = 4
     foot = 2
     auto = 1
@@ -166,6 +174,9 @@ function nodes_proc (kv, nokeys)
       if auto_tag == nil then
         auto = 0
       end
+      if emergency_tag == nil then
+        emergency = 0
+      end
     end
   end
 
@@ -176,6 +187,7 @@ function nodes_proc (kv, nokeys)
        kv["foot"] == "crossing" or kv["bicycle"] == "crossing" or
        kv["pedestrian"] == "crossing" or kv["crossing"] then
       bus  = 64
+      emergency = 16
       bike = 4
       foot = 2
       auto = 1
@@ -193,6 +205,9 @@ function nodes_proc (kv, nokeys)
       end
       if auto_tag then
         auto = auto_tag
+      end
+      if emergency_tag then
+        emergency = emergency_tag
       end
     end
   end
@@ -248,7 +263,7 @@ function nodes_proc (kv, nokeys)
   end
  
   --store a mask denoting access
-  kv["access_mask"] = bit32.bor(auto, bike, foot, bus)
+  kv["access_mask"] = bit32.bor(auto, emergency, bike, foot, bus)
 
   return 0, kv
 end
