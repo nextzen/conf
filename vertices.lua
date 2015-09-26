@@ -115,6 +115,10 @@ function nodes_proc (kv, nokeys)
   --normalize a few tags that we care about
   local access = access[kv["access"]] or "true"
 
+  if (kv["access"] == "private" and (kv["emergency"] == "yes" or kv["service"] == "emergency_access")) then
+    access = "false"
+  end 
+
   if kv["impassable"] == "yes" then
      access = "false"
   end  
