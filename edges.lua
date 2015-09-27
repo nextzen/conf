@@ -139,7 +139,8 @@ access = {
 ["official"] = "false",
 ["public"] = "true",
 ["restricted"] = "true",
-["allowed"] = "true"
+["allowed"] = "true",
+["emergency"] = false 
 }
 
 private = {
@@ -369,12 +370,21 @@ function filter_tags_generic(kv)
   local forward = highway[kv["highway"]]
   local ferry = kv["route"] == "ferry"
   local access = access[kv["access"]]
+
+  kv["emergency_forward"] = "false"
+  kv["emergency_backward"] = "false"
+
+  if kv["access"] == "emergency" or kv["emergency"] == "yes" or kv["service"] == "emergency_access" then
+    kv["emergency_forward"] = "true"
+  end
+
   if forward then
     for k,v in pairs(forward) do
       kv[k] = v
     end
 
-    if kv["impassable"] == "yes" or access == "false" then
+    if kv["impassable"] == "yes" or access == "false" or (kv["access"] == "private" and (kv["emergency"] == "yes" or kv["service"] == "emergency_access")) then
+
       kv["auto_forward"] = "false"
       kv["bus_forward"] = "false"
       kv["pedestrian"] = "false"
@@ -383,6 +393,7 @@ function filter_tags_generic(kv)
       kv["auto_backward"] = "false"
       kv["bus_backward"] = "false"
       kv["bike_backward"] = "false"
+
     end  
 
     --check for auto_forward overrides
@@ -401,7 +412,8 @@ function filter_tags_generic(kv)
     --if its a ferry and these tags dont show up we want to set them to true 
     local default_val = tostring(ferry)
 
-    if kv["impassable"] == "yes" or access == "false" then
+    if kv["impassable"] == "yes" or access == "false" or (kv["access"] == "private" and (kv["emergency"] == "yes" or kv["service"] == "emergency_access")) then 
+
       kv["auto_forward"] = "false"
       kv["bus_forward"] = "false"
       kv["pedestrian"] = "false"
@@ -410,7 +422,8 @@ function filter_tags_generic(kv)
       kv["auto_backward"] = "false"
       kv["bus_backward"] = "false"
       kv["bike_backward"] = "false"
-    end      
+
+    end
 
     --check for auto_forward overrides
     kv["auto_forward"] = motor_vehicle[kv["motorcar"]] or motor_vehicle[kv["motor_vehicle"]] or default_val
@@ -462,7 +475,8 @@ function filter_tags_generic(kv)
   kv["oneway"] = oneway_norm
   if oneway_norm == "true" then
     kv["auto_backward"] = "false"
-    
+    kv["emergency_backward"] = "false"
+ 
     if kv["bike_backward"] == "true" then 
       if (oneway_bike == nil or oneway_bike == "true") then --bike only in reverse on a bike path.
         kv["bike_forward"] = "false"
@@ -480,6 +494,8 @@ function filter_tags_generic(kv)
 
   elseif oneway_norm == nil or oneway_norm == "false" then
     kv["auto_backward"] = kv["auto_forward"]
+    kv["emergency_backward"] = kv["emergency_forward"]
+
     if (kv["bike_backward"] == "false" and kv["oneway:bicycle"] ~= "-1" and 
        (kv["oneway:bicycle"] == nil or oneway[kv["oneway:bicycle"]] == false)) then
       kv["bike_backward"] = kv["bike_forward"]
@@ -509,6 +525,10 @@ function filter_tags_generic(kv)
     local forwards = kv["auto_forward"]
     kv["auto_forward"] = kv["auto_backward"]
     kv["auto_backward"] = forwards
+
+    forwards = kv["emergency_forward"]
+    kv["emergency_forward"] = kv["emergency_backward"]
+    kv["emergency_backward"] = forwards
 
     forwards = kv["bus_forward"]
     kv["bus_forward"] = kv["bus_backward"]
@@ -554,7 +574,7 @@ function filter_tags_generic(kv)
 
 
   --if none of the modes were set we are done looking at this junker
-  if kv["auto_forward"] == "false" and kv["bus_forward"] == "false" and kv["bike_forward"] == "false" and kv["auto_backward"] == "false" and kv["bus_backward"] == "false" and kv["bike_backward"] == "false" and kv["pedestrian"] == "false" then
+  if kv["auto_forward"] == "false" and kv["bus_forward"] == "false" and kv["bike_forward"] == "false" and kv["auto_backward"] == "false" and kv["bus_backward"] == "false" and kv["bike_backward"] == "false" and kv["pedestrian"] == "false" and kv["emergency_forward"] == "false" and kv["emergency_backward"] == "false" then
     return 1
   end
 
