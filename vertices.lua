@@ -134,17 +134,17 @@ function nodes_proc (kv, nokeys)
     bus_tag = 64
   end
 
-  local emergency_tag = kv["access"] == "emergency" or kv["emergency"] == "yes" or kv["service"] == "emergency_access" or nil
-  local emergency = 0
-  if emergency_tag ~= nil then
-     emergency = 16
+  local emergency_tag --implies nil 
+  if kv["access"] == "emergency" or kv["emergency"] == "yes" or kv["service"] == "emergency_access" then
+     emergency_tag = 16
   end
 
   local auto = auto_tag or 0
   local bus = bus_tag or 0
   local foot = foot_tag or 0
   local bike = bike_tag or 0
-   
+  local emergency = emergency_tag or 0 
+
   --access was set, but foot, bus, bike, and auto tags were not.
   if access == "true" and bit32.bor(auto, emergency, bike, foot, bus) == 0 then
     bus  = 64
