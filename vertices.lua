@@ -90,6 +90,24 @@ bus = {
 ["delivery"] = 0
 }
 
+truck = {
+["designated"] = 8,
+["yes"] = 8,
+["no"] = 0,
+["destination"] = 8,
+["delivery"] = 8,
+["local"] = 8,
+["agricultural"] = 0,
+["private"] = 8,
+["discouraged"] = 0,
+["permissive"] = 0,
+["unsuitable"] = 0,
+["agricultural;forestry"] = 0,
+["official"] = 0,
+["forestry"] = 0,
+["destination;delivery"] = 8
+}
+
 psv = {
 ["bus"] = 64,
 ["no"] = 0,
@@ -120,7 +138,8 @@ function nodes_proc (kv, nokeys)
   end 
 
   local foot_tag = foot[kv["foot"]] 
-  local bike_tag = bicycle[kv["bicycle"]] 
+  local bike_tag = bicycle[kv["bicycle"]]
+  local truck_tag = truck[kv["hgv"]]
   local auto_tag = motor_vehicle[kv["motorcar"]]
   if auto_tag == nil then
     auto_tag = motor_vehicle[kv["motor_vehicle"]]
@@ -140,15 +159,17 @@ function nodes_proc (kv, nokeys)
   end
 
   local auto = auto_tag or 0
+  local truck = truck_tag or 0
   local bus = bus_tag or 0
   local foot = foot_tag or 0
   local bike = bike_tag or 0
   local emergency = emergency_tag or 0 
 
   --access was set, but foot, bus, bike, and auto tags were not.
-  if access == "true" and bit32.bor(auto, emergency, bike, foot, bus) == 0 then
+  if access == "true" and bit32.bor(auto, emergency, truck, bike, foot, bus) == 0 then
     bus  = 64
     emergency = 16
+    truck = 8
     bike = 4
     foot = 2
     auto = 1
@@ -174,6 +195,9 @@ function nodes_proc (kv, nokeys)
       if auto_tag == nil then
         auto = 0
       end
+      if truck_tag == nil then
+        truck = 0
+      end
       if emergency_tag == nil then
         emergency = 0
       end
@@ -188,6 +212,7 @@ function nodes_proc (kv, nokeys)
        kv["pedestrian"] == "crossing" or kv["crossing"] then
       bus  = 64
       emergency = 16
+      truck = 8
       bike = 4
       foot = 2
       auto = 1
@@ -205,6 +230,9 @@ function nodes_proc (kv, nokeys)
       end
       if auto_tag then
         auto = auto_tag
+      end
+      if truck_tag then
+        truck = truck_tag
       end
       if emergency_tag then
         emergency = emergency_tag
@@ -263,7 +291,7 @@ function nodes_proc (kv, nokeys)
   end
  
   --store a mask denoting access
-  kv["access_mask"] = bit32.bor(auto, emergency, bike, foot, bus)
+  kv["access_mask"] = bit32.bor(auto, emergency, truck, bike, foot, bus)
 
   return 0, kv
 end
