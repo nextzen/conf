@@ -412,7 +412,6 @@ function normalize_weight(weight)
     local num = numeric_prefix(w, true)
 
     if num then
-      --print(weight)
       if w:sub(-1) == "t" or w:sub(-5) == "tonne" or w:sub(-6) == "tonnes" then 
         if (num .. "t" == w) or (num .. "tonne" == w) or (num .. "tonnes" == w) then
           return round(num,2)
@@ -423,11 +422,9 @@ function normalize_weight(weight)
          if (num .. "ton" == w) or (num .. "tons" == w) then
            return round(num,2)
          end
-         --num = round((num/1.10231),2)
       end
 
       if w:sub(-2) == "lb" or w:sub(-3) == "lbs" then
-        --num = round((num/2240),2) -- convert to tonnes
         if (num .. "lb" == w) or (num .. "lbs" == w) then
           return round((num/2000),2) -- convert to tons
         end
@@ -455,7 +452,6 @@ function normalize_measurement(measurement)
     --grab the number prefix
     local num = numeric_prefix(m, true)
     if num then
-      --print(measurement)
       if m:sub(-1) == "m" or m:sub(-5) == "meter" or m:sub(-6) == "meters" then 
         if (num .. "m" == m) or (num .. "meter" == m) or (num .. "meters" == m) then
           return round(num,2)
