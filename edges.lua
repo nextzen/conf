@@ -412,15 +412,16 @@ function normalize_weight(weight)
     local num = numeric_prefix(w, true)
 
     if num then
+      --print(weight)
       if w:sub(-1) == "t" or w:sub(-5) == "tonne" or w:sub(-6) == "tonnes" then 
         if (num .. "t" == w) or (num .. "tonne" == w) or (num .. "tonnes" == w) then
-          return num
+          return round(num,2)
         end
       end 
 
       if w:sub(-3) == "ton" or w:sub(-4) == "tons" then
          if (num .. "ton" == w) or (num .. "tons" == w) then
-           return num
+           return round(num,2)
          end
          --num = round((num/1.10231),2)
       end
@@ -437,7 +438,7 @@ function normalize_weight(weight)
           return round((num/1000),2)
         end
       end
-      return num --3.5
+      return round(num,2) --3.5
     end
   end
   return nil
@@ -454,9 +455,10 @@ function normalize_measurement(measurement)
     --grab the number prefix
     local num = numeric_prefix(m, true)
     if num then
+      --print(measurement)
       if m:sub(-1) == "m" or m:sub(-5) == "meter" or m:sub(-6) == "meters" then 
         if (num .. "m" == m) or (num .. "meter" == m) or (num .. "meters" == m) then
-          return num
+          return round(num,2)
         end
       end
 
@@ -464,6 +466,12 @@ function normalize_measurement(measurement)
       local inches
 
       if m:sub(-2) == "in" or m:sub(-1) == "\"" or m:sub(-6) == "inches" or m:sub(-4) == "inch" then
+
+--have to check for inches only
+        if (num .. "in" == m) or (num .. "\"" == m) or (num .. "inches" == m) or (num .. "inch" == m) then
+          return round((num * 0.0254),2)
+        end
+
         feet = num
         m = string.sub(measurement, string.len(tostring(feet))+1)
 
@@ -474,6 +482,7 @@ function normalize_measurement(measurement)
           end
           index = index + 1
         end
+
         m = m:sub(index+1)
         inches = numeric_prefix(m, true)
         num = round((feet * 0.3048) + (inches * 0.0254),2)
@@ -503,7 +512,7 @@ function normalize_measurement(measurement)
           end 
         end
       end
-      return num
+      return round(num,2)
     end
   end
   return nil
