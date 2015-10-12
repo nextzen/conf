@@ -15,7 +15,8 @@ access = {
 ["official"] = "false",
 ["public"] = "true",
 ["restricted"] = "true",
-["allowed"] = "true"
+["allowed"] = "true",
+["emergency"] = "false"
 }
 
 motor_vehicle = {
@@ -89,6 +90,24 @@ bus = {
 ["delivery"] = 0
 }
 
+truck = {
+["designated"] = 8,
+["yes"] = 8,
+["no"] = 0,
+["destination"] = 8,
+["delivery"] = 8,
+["local"] = 8,
+["agricultural"] = 0,
+["private"] = 8,
+["discouraged"] = 0,
+["permissive"] = 0,
+["unsuitable"] = 0,
+["agricultural;forestry"] = 0,
+["official"] = 0,
+["forestry"] = 0,
+["destination;delivery"] = 8
+}
+
 psv = {
 ["bus"] = 64,
 ["no"] = 0,
@@ -114,12 +133,13 @@ function nodes_proc (kv, nokeys)
   --normalize a few tags that we care about
   local access = access[kv["access"]] or "true"
 
-  if kv["impassable"] == "yes" then
-     access = "false"
-  end  
+  if (kv["impassable"] == "yes" or (kv["access"] == "private" and (kv["emergency"] == "yes" or kv["service"] == "emergency_access"))) then
+    access = "false"
+  end 
 
   local foot_tag = foot[kv["foot"]] 
-  local bike_tag = bicycle[kv["bicycle"]] 
+  local bike_tag = bicycle[kv["bicycle"]]
+  local truck_tag = truck[kv["hgv"]]
   local auto_tag = motor_vehicle[kv["motorcar"]]
   if auto_tag == nil then
     auto_tag = motor_vehicle[kv["motor_vehicle"]]
@@ -132,15 +152,24 @@ function nodes_proc (kv, nokeys)
   if bus_tag == nil and auto_tag == 1 then
     bus_tag = 64
   end
-  
+
+  local emergency_tag --implies nil 
+  if kv["access"] == "emergency" or kv["emergency"] == "yes" or kv["service"] == "emergency_access" then
+     emergency_tag = 16
+  end
+
   local auto = auto_tag or 0
+  local truck = truck_tag or 0
   local bus = bus_tag or 0
   local foot = foot_tag or 0
   local bike = bike_tag or 0
-   
+  local emergency = emergency_tag or 0 
+
   --access was set, but foot, bus, bike, and auto tags were not.
-  if access == "true" and bit32.bor(auto, bike, foot, bus) == 0 then
+  if access == "true" and bit32.bor(auto, emergency, truck, bike, foot, bus) == 0 then
     bus  = 64
+    emergency = 16
+    truck = 8
     bike = 4
     foot = 2
     auto = 1
@@ -166,6 +195,12 @@ function nodes_proc (kv, nokeys)
       if auto_tag == nil then
         auto = 0
       end
+      if truck_tag == nil then
+        truck = 0
+      end
+      if emergency_tag == nil then
+        emergency = 0
+      end
     end
   end
 
@@ -176,6 +211,8 @@ function nodes_proc (kv, nokeys)
        kv["foot"] == "crossing" or kv["bicycle"] == "crossing" or
        kv["pedestrian"] == "crossing" or kv["crossing"] then
       bus  = 64
+      emergency = 16
+      truck = 8
       bike = 4
       foot = 2
       auto = 1
@@ -193,6 +230,12 @@ function nodes_proc (kv, nokeys)
       end
       if auto_tag then
         auto = auto_tag
+      end
+      if truck_tag then
+        truck = truck_tag
+      end
+      if emergency_tag then
+        emergency = emergency_tag
       end
     end
   end
@@ -248,7 +291,7 @@ function nodes_proc (kv, nokeys)
   end
  
   --store a mask denoting access
-  kv["access_mask"] = bit32.bor(auto, bike, foot, bus)
+  kv["access_mask"] = bit32.bor(auto, emergency, truck, bike, foot, bus)
 
   return 0, kv
 end
