@@ -158,21 +158,22 @@ function nodes_proc (kv, nokeys)
      emergency_tag = 16
   end
 
-  local auto = auto_tag or 0
-  local truck = truck_tag or 0
-  local bus = bus_tag or 0
-  local foot = foot_tag or 0
-  local bike = bike_tag or 0
-  local emergency = emergency_tag or 0 
+  --if tag exists use it, otherwise access allowed for all modes unless access = false.  
+  local auto = auto_tag or 1
+  local truck = truck_tag or 8 
+  local bus = bus_tag or 64
+  local foot = foot_tag or 2
+  local bike = bike_tag or 4
+  local emergency = emergency_tag or 16
 
-  --access was set, but foot, bus, bike, and auto tags were not.
-  if access == "true" and bit32.bor(auto, emergency, truck, bike, foot, bus) == 0 then
-    bus  = 64
-    emergency = 16
-    truck = 8
-    bike = 4
-    foot = 2
-    auto = 1
+  --if access = false use tag if exists, otherwise no access for that mode.
+  if access == "false" then
+    auto = auto_tag or 0
+    truck = truck_tag or 0
+    bus = bus_tag or 0
+    foot = foot_tag or 0
+    bike = bike_tag or 0
+    emergency = emergency_tag or 0
   end 
 
   --check for gates and bollards
@@ -188,19 +189,12 @@ function nodes_proc (kv, nokeys)
       bollard = false
     end
    
+    --bollard = true shuts off access unless the tag exists.
     if bollard == true then
-      if bus_tag == nil then
-        bus = 0
-      end
-      if auto_tag == nil then
-        auto = 0
-      end
-      if truck_tag == nil then
-        truck = 0
-      end
-      if emergency_tag == nil then
-        emergency = 0
-      end
+      bus = bus_tag or 0
+      auto = auto_tag or 0
+      truck = truck_tag or 0
+      emergency = emergency_tag or 0
     end
   end
 
@@ -210,33 +204,12 @@ function nodes_proc (kv, nokeys)
        kv["footway"] == "crossing" or kv["cycleway"] == "crossing" or
        kv["foot"] == "crossing" or kv["bicycle"] == "crossing" or
        kv["pedestrian"] == "crossing" or kv["crossing"] then
-      bus  = 64
-      emergency = 16
-      truck = 8
-      bike = 4
-      foot = 2
-      auto = 1
-
-      if bus_tag then 
-        bus = bus_tag
-      end
-  
-      if bike_tag then
-        bike = bike_tag
-      end
- 
-      if foot_tag then
-        foot = foot_tag
-      end
-      if auto_tag then
-        auto = auto_tag
-      end
-      if truck_tag then
-        truck = truck_tag
-      end
-      if emergency_tag then
-        emergency = emergency_tag
-      end
+         auto = auto_tag or 1
+         truck = truck_tag or 8
+         bus = bus_tag or 64
+         foot = foot_tag or 2
+         bike = bike_tag or 4
+         emergency = emergency_tag or 16
     end
   end
 
