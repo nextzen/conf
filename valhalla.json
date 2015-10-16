@@ -31,13 +31,16 @@
       "admin_dir": "/data/valhalla",
       "db_name": "admin.sqlite"
     },
+    "timezone": {
+      "timezone_dir": "/data/valhalla",
+      "db_name": "tz_world.sqlite"
+    },
     "statistics": {
       "statistics_dir": "/data/valhalla",
       "db_name": "statistics.sqlite"
     },
     "transit": {
-      "transit_dir": "/data/valhalla",
-      "db_name": "transit.sqlite"
+      "transit_dir": "/data/valhalla"
     },
     "logging": {
       "type": "std_out",
