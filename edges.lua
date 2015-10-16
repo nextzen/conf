@@ -882,6 +882,10 @@ function filter_tags_generic(kv)
   kv["hazmat"] = hazmat[kv["hazmat"]] or hazmat[kv["hazmat:water"]] or hazmat[kv["hazmat:A"]] or hazmat[kv["hazmat:B"]] or 
                  hazmat[kv["hazmat:C"]] or hazmat[kv["hazmat:D"]] or hazmat[kv["hazmat:E"]] 
   kv["maxspeed:hgv"] = normalize_speed(kv["maxspeed:hgv"])
+  
+  if (kv["hgv:national_network"] or kv["hgv:state_network"] or kv["hgv"] == "local" or kv["hgv"] == "designated") then
+    kv["truck_route"] = "true"
+  end
 
   local nref = kv["ncn_ref"]
   local rref = kv["rcn_ref"]
