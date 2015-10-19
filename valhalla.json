@@ -40,7 +40,7 @@
       "db_name": "statistics.sqlite"
     },
     "transit": {
-      "transit_dir": "/data/valhalla"
+      "transit_dir": "/data/valhalla/mjolnir/TL"
     },
     "logging": {
       "type": "std_out",
