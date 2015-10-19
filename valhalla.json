@@ -27,21 +27,10 @@
       "relation_script": "conf/admins.lua",
       "relation_function": "rels_proc"
     },
-    "admin": {
-      "admin_dir": "/data/valhalla",
-      "db_name": "admin.sqlite"
-    },
-    "timezone": {
-      "timezone_dir": "/data/valhalla",
-      "db_name": "tz_world.sqlite"
-    },
-    "statistics": {
-      "statistics_dir": "/data/valhalla",
-      "db_name": "statistics.sqlite"
-    },
-    "transit": {
-      "transit_dir": "/data/valhalla"
-    },
+    "admin": "/data/valhalla/admin.sqlite",
+    "timezone": "/data/valhalla/tz_world.sqlite",
+    "statistics": "/data/valhalla/statistics.sqlite",
+    "transit_dir": "/data/valhalla/transit",
     "logging": {
       "type": "std_out",
       "color": true
@@ -142,8 +131,10 @@
       "max_area": 5000000.0,
       "max_locations": 20
     },
-    "max_shape": 750000,
-    "min_resample": 10.0 
+    "skadi": {
+      "max_shape": 750000,
+      "min_resample": 10.0
+    }
   },
   "costing_options": {
     "auto": {
