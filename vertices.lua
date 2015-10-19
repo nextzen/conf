@@ -191,9 +191,11 @@ function nodes_proc (kv, nokeys)
    
     --bollard = true shuts off access unless the tag exists.
     if bollard == true then
-      bus = bus_tag or 0
       auto = auto_tag or 0
       truck = truck_tag or 0
+      bus = bus_tag or 0
+      foot = foot_tag or 0
+      bike = bike_tag or 0
       emergency = emergency_tag or 0
     end
   end
