@@ -48,6 +48,7 @@
     "elevation": "/data/valhalla/elevation/"
   },
   "loki": {
+    "actions":["locate","route","one_to_many","many_to_one","many_to_many"],
     "logging": {
       "type": "std_out",
       "color": true
@@ -57,6 +58,7 @@
     }
   },
   "skadi": {
+    "actions":["height"],
     "logging": {
       "type": "std_out",
       "color": true
