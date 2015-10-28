@@ -613,10 +613,10 @@ function filter_tags_generic(kv)
   end
 
   --check the oneway-ness and traversability against the direction of the geom
-  kv["bike_backward"] = bike_reverse[kv["cycleway"]] or bike_reverse[kv["cycleway:left"]] or bike_reverse[kv["cycleway:right"]] or "false"
+  kv["bike_backward"] = kv["bicycle:backward"] == "yes" or kv["bicycle:backward"] == "no" or bike_reverse[kv["cycleway"]] or bike_reverse[kv["cycleway:left"]] or bike_reverse[kv["cycleway:right"]] or "false"
 
   if kv["bike_backward"] == "true" then
-    oneway_bike = oneway[kv["oneway:bicycle"]]
+    oneway_bike = oneway[kv["oneway:bicycle"]] or kv["bicycle:backward"] == "yes"
   end
 
   kv["bus_backward"] = bus_reverse[kv["busway"]] or psv[kv["lanes:psv:backward"]] or "false"
