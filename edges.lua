@@ -613,12 +613,14 @@ function filter_tags_generic(kv)
   end
 
   --check the oneway-ness and traversability against the direction of the geom
-  kv["bike_backward"] = bike_reverse[kv["cycleway"]] or bike_reverse[kv["cycleway:left"]] or bike_reverse[kv["cycleway:right"]] or "false"
-
-  if (kv["bike_backward"] == "false" and (kv["bicycle:backward"] == "yes" or kv["bicycle:backward"] == "no")) then
+  if ((kv["oneway"] == "yes" and kv["oneway:bicycle"] == "no") or kv["bicycle:backward"] == "yes" or kv["bicycle:backward"] == "no") then
     kv["bike_backward"] = "true"
   end
- 
+
+  if kv["bike_backward"] == nil or kv["bike_backward"] == "false" then
+    kv["bike_backward"] = bike_reverse[kv["cycleway"]] or bike_reverse[kv["cycleway:left"]] or bike_reverse[kv["cycleway:right"]] or "false"
+  end
+
   if kv["bike_backward"] == "true" then
     oneway_bike = oneway[kv["oneway:bicycle"]]
     if (oneway_bike == "false" and kv["bicycle:backward"] == "yes") then
@@ -626,10 +628,19 @@ function filter_tags_generic(kv)
     end
   end
 
-  kv["bus_backward"] = bus_reverse[kv["busway"]] or psv[kv["lanes:psv:backward"]] or "false"
+  if ((kv["oneway"] == "yes" and kv["oneway:bus"] == "no") or kv["bus:backward"] == "yes" or kv["bus:backward"] == "no") then
+    kv["bus_backward"] = "true"
+  end
+
+  if kv["bus_backward"] == nil or kv["bus_backward"] == "false" then
+    kv["bus_backward"] = bus_reverse[kv["busway"]] or bus_reverse[kv["busway:left"]] or bus_reverse[kv["busway:right"]] or psv[kv["lanes:psv:backward"]] or "false"
+  end
 
   if kv["bus_backward"] == "true" then
     oneway_bus = oneway[kv["oneway:bus"]]
+    if (oneway_bus == "false" and kv["bus:backward"] == "yes") then
+      oneway_bus = "true"
+    end  
   end
 
   local oneway_reverse = kv["oneway"]
@@ -647,14 +658,14 @@ function filter_tags_generic(kv)
     kv["emergency_backward"] = "false"
  
     if kv["bike_backward"] == "true" then 
-      if (oneway_bike == nil or oneway_bike == "true") then --bike only in reverse on a bike path.
+      if (oneway_bike == "true") then --bike only in reverse on a bike path.
         kv["bike_forward"] = "false"
       elseif oneway_bike == "false" then --bike in both directions on a bike path.
         kv["bike_forward"] = "true"
       end
     end
     if kv["bus_backward"] == "true" then
-      if (oneway_bus == nil or oneway_bus == "true") then --bus only in reverse on a bus path.
+      if (oneway_bus == "true") then --bus only in reverse on a bus path.
         kv["bus_forward"] = "false"
       elseif oneway_bus == "false" then --bus in both directions on a bus path.
         kv["bus_forward"] = "true"
