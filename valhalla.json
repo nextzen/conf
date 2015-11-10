@@ -46,7 +46,7 @@
       "color": true
     },
     "service": {
-      "proxy": "ipc://loki"
+      "proxy": "ipc:///tmp/loki"
     }
   },
   "skadi": {
@@ -56,7 +56,7 @@
       "color": true
     },
     "service": {
-      "proxy": "ipc://skadi"
+      "proxy": "ipc:///tmp/skadi"
     }
   },
   "thor": {
@@ -65,7 +65,7 @@
       "color": true
     },
     "service": {
-      "proxy": "ipc://thor"
+      "proxy": "ipc:///tmp/thor"
     }
   },
   "odin": {
@@ -74,7 +74,7 @@
       "color": true
     },
     "service": {
-      "proxy": "ipc://odin"
+      "proxy": "ipc:///tmp/odin"
     }
   },
   "tyr": {
@@ -83,13 +83,13 @@
       "color": true
     },
     "service": {
-      "proxy": "ipc://tyr"
+      "proxy": "ipc:///tmp/tyr"
     }
   },
   "httpd": {
     "service": {
       "listen": "tcp://*:8002",
-      "loopback": "ipc://loopback"
+      "loopback": "ipc:///tmp/loopback"
     }
   },
   "service_limits": {

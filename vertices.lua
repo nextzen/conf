@@ -194,8 +194,8 @@ function nodes_proc (kv, nokeys)
       auto = auto_tag or 0
       truck = truck_tag or 0
       bus = bus_tag or 0
-      foot = foot_tag or 0
-      bike = bike_tag or 0
+      foot = foot_tag or 2
+      bike = bike_tag or 4
       emergency = emergency_tag or 0
     end
   end
