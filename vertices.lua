@@ -177,7 +177,7 @@ function nodes_proc (kv, nokeys)
   end 
 
   --check for gates and bollards
-  local gate = kv["barrier"] == "gate" or kv["barrier"] == "lift_gate" or kv["barrier"] == "border_control"
+  local gate = kv["barrier"] == "gate" or kv["barrier"] == "lift_gate" 
   local bollard = false
   if gate == false then
     --if there was a bollard cars can't get through it
@@ -219,7 +219,9 @@ function nodes_proc (kv, nokeys)
   kv["gate"] = tostring(gate)
   kv["bollard"] = tostring(bollard)
 
-  if kv["barrier"] == "toll_booth" then
+  if kv["barrier"] == "border_control" then
+    kv["border_control"] = "true"
+  elseif kv["barrier"] == "toll_booth" then
     kv["toll_booth"] = "true"
   end
 
