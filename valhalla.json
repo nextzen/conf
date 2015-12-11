@@ -153,6 +153,14 @@
     },
     "bus": {
     },
+    "truck": {
+      "height": 4.11,
+      "width": 2.6,
+      "length": 15.24,
+      "weight": 36.29,
+      "axle_load": 9.07,
+      "hazmat": false
+    },
     "pedestrian": {
       "walking_speed": 5.1,
       "walkway_factor": 0.9,
@@ -173,6 +181,9 @@
     "multimodal": {
     },
     "transit": {
+      "use_bus": 0.5,
+      "use_rail": 0.5,
+      "use_transfers": 0.5
     }
   }
 }
