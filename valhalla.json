@@ -121,6 +121,10 @@
       "max_distance": 500000.0,
       "max_locations": 50
     },
+    "truck": {
+      "max_distance": 5000000.0,
+      "max_locations": 20
+    },
     "one_to_many": {
       "max_distance": 200000.0,
       "max_locations": 50
