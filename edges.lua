@@ -738,29 +738,12 @@ function filter_tags_generic(kv)
 
   -- bus only logic
   if kv["lanes:bus"] == "1" then
-    kv["auto_forward"] = "false"
-    kv["truck_forward"] = "false"
     kv["bus_forward"] = "true"
-    kv["pedestrian"] = "false"
-    kv["bike_forward"] = "false"
-
-    kv["auto_backward"] = "false"
-    kv["truck_backward"] = "false"
     kv["bus_backward"] = "false"
-    kv["bike_backward"] = "false"
   elseif kv["lanes:bus"] == "2" then  
-    kv["auto_forward"] = "false"
-    kv["truck_forward"] = "false"
     kv["bus_forward"] = "true"
-    kv["pedestrian"] = "false"
-    kv["bike_forward"] = "false"
-
-    kv["auto_backward"] = "false"
-    kv["truck_backward"] = "false"
     kv["bus_backward"] = "true"
-    kv["bike_backward"] = "false"
   end 
-
 
   --if none of the modes were set we are done looking at this junker
   if kv["auto_forward"] == "false" and kv["truck_forward"] == "false" and kv["bus_forward"] == "false" and kv["bike_forward"] == "false" and kv["emergency_forward"] == "false" and 
