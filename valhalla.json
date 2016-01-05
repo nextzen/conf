@@ -185,9 +185,9 @@
     "multimodal": {
     },
     "transit": {
-      "use_bus": 0.5,
+      "use_bus": 0.3,
       "use_rail": 0.5,
-      "use_transfers": 0.5
+      "use_transfers": 1.0
     }
   }
 }
