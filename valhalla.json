@@ -163,7 +163,16 @@
       "length": 21.64,
       "weight": 36.29,
       "axle_load": 9.07,
-      "hazmat": false
+      "hazmat": false,
+      "low_class_penalty": 30.0,
+      "maneuver_penalty": 5.0,
+      "destination_only_penalty": 600.0,
+      "alley_penalty": 5.0,
+      "gate_cost": 30.0,
+      "toll_booth_cost": 15.0,
+      "toll_booth_penalty": 0.0,
+      "country_crossing_cost": 600.0,
+      "country_crossing_penalty": 0.0
     },
     "pedestrian": {
       "walking_speed": 5.1,
