@@ -524,7 +524,8 @@ function filter_tags_generic(kv)
   kv["emergency_forward"] = "false"
   kv["emergency_backward"] = "false"
 
-  if kv["access"] == "emergency" or kv["emergency"] == "yes" or kv["service"] == "emergency_access" then
+  if (ferry == true or kv["highway"]) and 
+     (kv["access"] == "emergency" or kv["emergency"] == "yes" or kv["service"] == "emergency_access") then
     kv["emergency_forward"] = "true"
   end
 
@@ -751,6 +752,11 @@ function filter_tags_generic(kv)
      kv["pedestrian"] == "false" then
     return 1
   end
+
+   --toss areas
+   if kv["area"] then
+     return 1
+   end
 
    delete_tags = { 'FIXME', 'note', 'source' }
 

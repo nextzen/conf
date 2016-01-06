@@ -121,6 +121,10 @@
       "max_distance": 500000.0,
       "max_locations": 50
     },
+    "truck": {
+      "max_distance": 5000000.0,
+      "max_locations": 20
+    },
     "one_to_many": {
       "max_distance": 200000.0,
       "max_locations": 50
@@ -153,6 +157,23 @@
     },
     "bus": {
     },
+    "truck": {
+      "height": 4.11,
+      "width": 2.6,
+      "length": 21.64,
+      "weight": 21.77,
+      "axle_load": 9.07,
+      "hazmat": false,
+      "low_class_penalty": 30.0,
+      "maneuver_penalty": 5.0,
+      "destination_only_penalty": 600.0,
+      "alley_penalty": 5.0,
+      "gate_cost": 30.0,
+      "toll_booth_cost": 15.0,
+      "toll_booth_penalty": 0.0,
+      "country_crossing_cost": 600.0,
+      "country_crossing_penalty": 0.0
+    },
     "pedestrian": {
       "walking_speed": 5.1,
       "walkway_factor": 0.9,
@@ -173,6 +194,11 @@
     "multimodal": {
     },
     "transit": {
+      "use_bus": 0.3,
+      "use_rail": 0.5,
+      "use_transfers": 1.0,
+      "transfer_cost": 60.0,
+      "transfer_penalty": 300.0
     }
   }
 }
