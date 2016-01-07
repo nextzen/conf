@@ -84,7 +84,7 @@
     "logging": {
       "type": "std_out",
       "color": true,
-      "long_request": 10.0
+      "long_request": 100.0
     },
     "service": {
       "proxy": "ipc:///tmp/tyr"
