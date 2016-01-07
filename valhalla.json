@@ -43,7 +43,8 @@
     "actions":["locate","route","one_to_many","many_to_one","many_to_many"],
     "logging": {
       "type": "std_out",
-      "color": true
+      "color": true,
+      "long_request": 100.0
     },
     "service": {
       "proxy": "ipc:///tmp/loki"
