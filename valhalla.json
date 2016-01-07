@@ -53,7 +53,8 @@
     "actions":["height"],
     "logging": {
       "type": "std_out",
-      "color": true
+      "color": true,
+      "long_request": 5.0
     },
     "service": {
       "proxy": "ipc:///tmp/skadi"
@@ -62,7 +63,8 @@
   "thor": {
     "logging": {
       "type": "std_out",
-      "color": true
+      "color": true,
+      "long_request": 110.0
     },
     "service": {
       "proxy": "ipc:///tmp/thor"
@@ -80,7 +82,8 @@
   "tyr": {
     "logging": {
       "type": "std_out",
-      "color": true
+      "color": true,
+      "long_request": 10.0
     },
     "service": {
       "proxy": "ipc:///tmp/tyr"
