@@ -43,7 +43,8 @@
     "actions":["locate","route","one_to_many","many_to_one","many_to_many"],
     "logging": {
       "type": "std_out",
-      "color": true
+      "color": true,
+      "long_request": 100.0
     },
     "service": {
       "proxy": "ipc:///tmp/loki"
@@ -53,7 +54,8 @@
     "actions":["height"],
     "logging": {
       "type": "std_out",
-      "color": true
+      "color": true,
+      "long_request": 5.0
     },
     "service": {
       "proxy": "ipc:///tmp/skadi"
@@ -62,7 +64,8 @@
   "thor": {
     "logging": {
       "type": "std_out",
-      "color": true
+      "color": true,
+      "long_request": 110.0
     },
     "service": {
       "proxy": "ipc:///tmp/thor"
@@ -80,7 +83,8 @@
   "tyr": {
     "logging": {
       "type": "std_out",
-      "color": true
+      "color": true,
+      "long_request": 100.0
     },
     "service": {
       "proxy": "ipc:///tmp/tyr"
