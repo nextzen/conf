@@ -601,7 +601,16 @@ function filter_tags_generic(kv)
 
   --TODO: handle Time conditional restrictions if available for HOVs with oneway = reversible
   if ((kv["access"] == "permissive" or kv["access"] == "hov") and kv["oneway"] == "reversible") then
-    return 1
+   
+    -- for now enable only for buses if the tag exists and they are allowed.
+    if (kv["bus_forward"] == "true") then
+      kv["auto_forward"] = "false"
+      kv["truck_forward"] = "false"
+      kv["pedestrian"] = "false"
+      kv["bike_forward"] = "false"
+    else
+      return 1
+    end
   end
 
   --service=driveway means all are routable
