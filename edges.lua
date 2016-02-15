@@ -762,8 +762,8 @@ function filter_tags_generic(kv)
     return 1
   end
 
-   --toss areas
-   if kv["area"] then
+   --toss actual areas
+   if kv["area"] == "yes" then
      return 1
    end
 
