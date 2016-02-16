@@ -144,7 +144,8 @@ access = {
 }
 
 private = {
-["private"] = "true"
+["private"] = "true",
+["delivery"] = "true"
 }
 
 no_thru_traffic = {
@@ -841,7 +842,7 @@ function filter_tags_generic(kv)
      kv["link"] = "true"  --do we need to add more?  turnlane?
   end
 
-  kv["private"] = private[kv["access"]] or "false"
+  kv["private"] = private[kv["access"]] or private[kv["motor_vehicle"]] or "false"
   kv["no_thru_traffic"] = no_thru_traffic[kv["access"]] or "false"
   kv["ferry"] = tostring(ferry)
   kv["rail"] = tostring(kv["auto_forward"] == "true" and kv["railway"] == "rail")
