@@ -10,7 +10,6 @@ dependencies:
 test:
   override:
     - (rc=0; for f in *.json; do python -c "import json; json.load(open('$f'))" || rc=$?; done; exit $rc;)
-    - (rc=0; for f in *.lua; do lua $f || rc=$?; done; exit $rc;)
 
 general:
   artifacts:
