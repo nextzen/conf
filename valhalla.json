@@ -1,8 +1,5 @@
 {
   "mjolnir": {
-    "input": {
-      "type": "protocolbuffer"
-    },
     "hierarchy": {
       "tile_dir": "/data/valhalla",
       "levels": [
@@ -10,22 +7,6 @@
         {"name": "arterial", "level": 1, "size": 1, "importance_cutoff": "Tertiary"},
         {"name": "highway", "level": 0, "size": 4, "importance_cutoff": "Primary"}
       ]
-    },
-    "tagtransform": {
-      "node_script": "conf/vertices.lua",
-      "node_function": "nodes_proc",
-      "way_script": "conf/edges.lua",
-      "way_function": "ways_proc",
-      "relation_script": "conf/edges.lua",
-      "relation_function": "rels_proc"
-    },
-    "admintagtransform": {
-      "node_script": "conf/admins.lua",
-      "node_function": "nodes_proc",
-      "way_script": "conf/admins.lua",
-      "way_function": "ways_proc",
-      "relation_script": "conf/admins.lua",
-      "relation_function": "rels_proc"
     },
     "admin": "/data/valhalla/admin.sqlite",
     "timezone": "/data/valhalla/tz_world.sqlite",
