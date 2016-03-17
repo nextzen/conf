@@ -86,7 +86,9 @@
     },
     "pedestrian": {
       "max_distance": 250000.0,
-      "max_locations": 50
+      "max_locations": 50,
+      "min_transit_walking_distance": 1,
+      "max_transit_walking_distance": 10000
     },
     "bicycle": {
       "max_distance": 500000.0,
@@ -159,8 +161,6 @@
       "alley_factor": 2.0,
       "driveway_factor": 5.0,
       "step_penalty": 30.0,
-      "min_transit_walking_distance": 1,
-      "max_transit_walking_distance": 10000,
       "transit_start_end_max_distance": 2415,
       "transit_transfer_max_distance": 805
     },
