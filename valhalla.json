@@ -92,11 +92,11 @@
     },
     "service": {
       "proxy": "ipc:///tmp/meili"
+    },
+    "grid": {
+      "size": 500,
+      "cache_size": 64
     }
-  },
-  "grid": {
-    "size": 500,
-    "cache_size": 64
   },
   "tyr": {
     "logging": {
