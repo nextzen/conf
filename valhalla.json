@@ -90,9 +90,7 @@
       "color": true
     },
     "service": {
-      "proxy": "ipc:///tmp/meili",
-      "listen": "tcp://*:8001",
-      "loopback": "ipc:///tmp/meili_loopback"
+      "proxy": "ipc:///tmp/meili"
     }
   },
   "grid": {
