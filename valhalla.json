@@ -62,6 +62,7 @@
     "verbose": false,
     "default": {
       "sigma_z": 4.07,
+      "gps_accuracy": 4.07,
       "beta": 3,
       "max_route_distance_factor": 3,
       "breakage_distance": 2000,
