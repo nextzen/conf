@@ -209,7 +209,7 @@
       "transit_transfer_max_distance": 805
     },
     "bicycle": {
-      "maneuver_penalty": 10.0,
+      "maneuver_penalty": 5.0,
       "destination_only_penalty": 300.0,
       "alley_penalty": 60.0,
       "gate_cost": 30.0,
