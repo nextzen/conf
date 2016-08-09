@@ -223,8 +223,6 @@
       "transfer_penalty": 300.0
     },
     "sources_to_targets": {
-    },
-    "isochrone": {
     }
   }
 }
