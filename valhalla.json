@@ -16,7 +16,7 @@
     "elevation": "/data/valhalla/elevation/"
   },
   "loki": {
-    "actions":["locate","route","one_to_many","many_to_one","many_to_many"],
+    "actions":["locate","route","one_to_many","many_to_one","many_to_many","sources_to_targets","optimized_route","isochrone"],
     "logging": {
       "type": "std_out",
       "color": true,
@@ -41,8 +41,7 @@
     "logging": {
       "type": "std_out",
       "color": true,
-      "long_request_route": 110.0,
-      "long_request_manytomany": 15000.0
+      "long_request": 110.0
     },
     "service": {
       "proxy": "ipc:///tmp/thor"
@@ -151,21 +150,18 @@
       "max_distance": 5000000.0,
       "max_locations": 20
     },
-    "one_to_many": {
-      "max_distance": 200000.0,
-      "max_locations": 50
-    },
-    "many_to_one": {
-      "max_distance": 200000.0,
-      "max_locations": 50
-    },
-    "many_to_many": {
+    "sources_to_targets": {
       "max_distance": 200000.0,
       "max_locations": 50
     },
     "skadi": {
       "max_shape": 750000,
       "min_resample": 10.0
+    },
+      "isochrone": {
+        "max_contours": 4,
+        "max_time": 120,
+        "max_locations": 1
     }
   },
   "costing_options": {
@@ -227,6 +223,10 @@
       "use_transfers": 0.3,
       "transfer_cost": 15.0,
       "transfer_penalty": 300.0
+    },
+    "sources_to_targets": {
+    },
+    "isochrone": {
     }
   }
 }
