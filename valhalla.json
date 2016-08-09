@@ -4,8 +4,6 @@
     "tile_dir": "/data/valhalla",
     "admin": "/data/valhalla/admin.sqlite",
     "timezone": "/data/valhalla/tz_world.sqlite",
-    "statistics": "/data/valhalla/statistics.sqlite",
-    "maproulette_tasks": "/data/valhalla/tasks.json",
     "transit_dir": "/data/valhalla/transit",
     "logging": {
       "type": "std_out",
@@ -158,10 +156,10 @@
       "max_shape": 750000,
       "min_resample": 10.0
     },
-      "isochrone": {
-        "max_contours": 4,
-        "max_time": 120,
-        "max_locations": 1
+    "isochrone": {
+      "max_contours": 4,
+      "max_time": 120,
+      "max_locations": 1
     }
   },
   "costing_options": {
