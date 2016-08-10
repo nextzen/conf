@@ -1,7 +1,7 @@
 {
   "mjolnir": {
     "max_cache_size": 1000000000,
-    "tile_dir": "/data/valhalla",
+    "tile_dir": "/data/valhalla/tiles",
     "admin": "/data/valhalla/admin.sqlite",
     "timezone": "/data/valhalla/tz_world.sqlite",
     "transit_dir": "/data/valhalla/transit",
@@ -222,7 +222,5 @@
       "transfer_cost": 15.0,
       "transfer_penalty": 300.0
     },
-    "sources_to_targets": {
-    }
   }
 }
