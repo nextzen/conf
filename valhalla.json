@@ -221,6 +221,6 @@
       "use_transfers": 0.3,
       "transfer_cost": 15.0,
       "transfer_penalty": 300.0
-    },
+    }
   }
 }
