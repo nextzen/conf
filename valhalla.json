@@ -5,11 +5,18 @@
     "admin": "/data/valhalla/admin.sqlite",
     "timezone": "/data/valhalla/tz_world.sqlite",
     "statistics": "/data/valhalla/statistics.sqlite",
-    "maproulette_tasks": "/data/valhalla/tasks.json",
     "transit_dir": "/data/valhalla/transit",
     "logging": {
       "type": "std_out",
       "color": true
+    },
+    "maproulette": {
+      "database_file": "/data/valhalla/maproulette.sqlite",
+      "geojson_file": "maproulette_tasks.geojson",
+      "url": "http://localhost:9000",
+      "api_key": "2-gkXTYPGqJBIW3mP/fADklG9Tgy3JHYb0eeM6y2rR8Tgo1bNy/r1cuWBiRYTik0dtimjcbLxI",
+      "required_fields": ["name", "instruction"],
+      "fields": ["name", "description", "blurb", "instruction", "difficulty"]
     }
   },
   "additional_data": {
