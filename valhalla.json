@@ -9,21 +9,13 @@
     "logging": {
       "type": "std_out",
       "color": true
-    },
-    "maproulette": {
-      "database_file": "/data/valhalla/maproulette.sqlite",
-      "geojson_file": "maproulette_tasks.geojson",
-      "url": "http://localhost:9000",
-      "api_key": "2-gkXTYPGqJBIW3mP/fADklG9Tgy3JHYb0eeM6y2rR8Tgo1bNy/r1cuWBiRYTik0dtimjcbLxI",
-      "required_fields": ["name", "instruction"],
-      "fields": ["name", "description", "blurb", "instruction", "difficulty"]
     }
   },
   "additional_data": {
     "elevation": "/data/valhalla/elevation/"
   },
   "loki": {
-    "actions":["locate","route","one_to_many","many_to_one","many_to_many","sources_to_targets","optimized_route","isochrone"],
+    "actions":["locate","route","one_to_many","many_to_one","many_to_many"],
     "logging": {
       "type": "std_out",
       "color": true,
@@ -48,7 +40,8 @@
     "logging": {
       "type": "std_out",
       "color": true,
-      "long_request": 110.0
+      "long_request_route": 110.0,
+      "long_request_manytomany": 15000.0
     },
     "service": {
       "proxy": "ipc:///tmp/thor"
@@ -157,18 +150,21 @@
       "max_distance": 5000000.0,
       "max_locations": 20
     },
-    "sources_to_targets": {
+    "one_to_many": {
+      "max_distance": 200000.0,
+      "max_locations": 50
+    },
+    "many_to_one": {
+      "max_distance": 200000.0,
+      "max_locations": 50
+    },
+    "many_to_many": {
       "max_distance": 200000.0,
       "max_locations": 50
     },
     "skadi": {
       "max_shape": 750000,
       "min_resample": 10.0
-    },
-    "isochrone": {
-      "max_contours": 4,
-      "max_time": 120,
-      "max_locations": 1
     }
   },
   "costing_options": {
