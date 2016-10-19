@@ -161,6 +161,9 @@
       "max_contours": 4,
       "max_time": 120,
       "max_locations": 1
+    },
+    "trace_route": {
+      "max_shape": 750000
     }
   }
 }
