@@ -61,12 +61,12 @@
     "verbose": false,
     "default": {
       "sigma_z": 4.07,
-      "gps_accuracy": 4.07,
+      "gps_accuracy": 5.0,
       "beta": 3,
       "max_route_distance_factor": 3,
       "breakage_distance": 2000,
       "interpolation_distance": 10,
-      "search_radius": 40,
+      "search_radius": 10,
       "max_search_radius": 100,
       "geometry": false,
       "route": true,
@@ -95,7 +95,7 @@
     },
     "grid": {
       "size": 500,
-      "cache_size": 64
+      "cache_size": 10240
     }
   },
   "tyr": {
