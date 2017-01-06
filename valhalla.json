@@ -169,7 +169,7 @@
     },
     "trace": {
       "max_distance": 65000.0,
-      "max_shape": 2000
+      "max_shape": 1000
     }
   }
 }
