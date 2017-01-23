@@ -42,6 +42,7 @@
       "color": true,
       "long_request": 110.0
     },
+    "source_to_target_algorithm": "select_optimal",
     "service": {
       "proxy": "ipc:///tmp/thor"
     }
