@@ -67,7 +67,7 @@
       "max_route_distance_factor": 3,
       "breakage_distance": 2000,
       "interpolation_distance": 10,
-      "search_radius": 10,
+      "search_radius": 50,
       "max_search_radius": 100,
       "geometry": false,
       "route": true,
@@ -169,8 +169,8 @@
       "max_locations": 1
     },
     "trace": {
-      "max_distance": 65000.0,
-      "max_shape": 1000
+      "max_distance": 162500.0,
+      "max_shape": 8000
     }
   }
 }
