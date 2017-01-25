@@ -96,7 +96,7 @@
     },
     "grid": {
       "size": 500,
-      "cache_size": 10240
+      "cache_size": 100240
     }
   },
   "tyr": {
